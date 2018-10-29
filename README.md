@@ -1,8 +1,12 @@
-# Coding Challenge - Data Scientist
+# Coding Challenge - Data Engineer
 
 This repository was created to host the helper files for the Data Engineering role challenge.
 
-The instructions below imply you have a minimum knowledge on how to run the Python data generator. That code will need to run to interact with your solution. This does not imply your solution too should be developed in Python. You are free to write your solution in the language of your preference within a short list we provide. However, we recommend you choose a language that you judge is the most appropriate for this kind of problem, taking into account easyness and time to develop, performance, and availability of libraries and connectors that might be helpful.
+The instructions below imply you have a minimum knowledge on how to run a docker container. This does not imply your \
+solution too should run in Docker. 
+You are free to write your solution in the language of your preference within a short list we provide. However, we recommend\
+you choose a language that you judge is the most appropriate for this kind of problem, taking into account easyness and time\
+to develop, performance, and availability of libraries and connectors that might be helpful.
 
 The languages you can consider as candidates for most appropriate ate:
 * JavaScript
@@ -12,56 +16,44 @@ The languages you can consider as candidates for most appropriate ate:
 
 ## The problem - Calculating real-time traffic in a bus network
 
-X
+There is a bus network with a few routes. Each route is formed by a fixed sequence of stops. In each route, a few vehicles run - they might sometimes change routes after finishing a route.
+
+The mayor has implemented a system in which buses have a GPS, and they send their coordinates every 30 seconds or so. Sometimes less, sometimes more, but never more than 120 seconds. With those coordinates, a central server issues forecasts of the arrival time of those vehicles to each of the following stops in its route.
+
+There is a server that provides those forecasts. They come in a big JSON, with all forecasts calculated in a window of 30 seconds.
+
+There is one problem: the forecasts provided don't take traffic into account. Therefore they are good, but not great.
+
+We want to create another server that provides better forecasts, that take traffic into account. Too complicated? Maybe... So, that is not your task. You have a simpler task! All you need is to create a micro-service that can answer, given a pair of consecutive stops, what is the current average travel time between those stops.
+
+Imagine, someone queries `YOUR-MS:8080/average_travel_time?from=f31423ab&to=f317ac2` and you need to answer `{'average_travel_time': 127.2}`. As simple as that. ;-)
+
+Ok, you might be wondering: I don't know when a bus arrived at a stop, I only know when, sometime in the past, a system forecasted the bus would arrive. Well, life is hard, and we need to deal with the best information we have. So, to simplify things, you can assume the following: If a vehicle didn't produce new information about its arrival at a certain stop for 120 seconds or more, than the vehicle has already passed that stop, and you can safely assume it arrived at the latest forecasted time. I don't mean 120 seconds between you getting the information, but rather 120s between two forecast about the vehicle being produced.
+
+There might be other corner issues, but we trust your judgement about how to deal with them.
 
 ### Details
 
-For this task you can use any language of your choice for analysis and modeling. However you will need to integrate your \
-model with the provided evaluation code in Python 3.
-
 You will need to:
 * Create a local git repository
-* Download the Python files provided: `evaluate.py`, `file_evaluation.py` and `your_model.py` 
-* Install Python 3 in a virtual environment
-* Download the dataset for this task from your e-mail. (__Note:__ There is no limit on the time you need to return your \
-solution. However that time will be taken into consideration when analyzing your solution.)
-* Create a program to (re-)train and serialize a model to solve the problem.
-* Create a program to use the trained model in the evaluation of additional data. (Integrate it in `your_model.py`)
-* Submit your repo and your presentation within the deadline
+* Download the docker file provided from a link provided by e-mail: `serve.tar` 
+* Create a microsservice to serve the needs above
+* Submit your repo and any relevant comments
 
-### Procedure
+Please don't use any external storage services. In case you need a database, you are free to use an emulator from a testing framework of the language you chose. In case you need SQL, make your code deal with a SQLite file.
 
+### Procedure to run the forecast server
+1. Install and setup Docker
+1. Install the docker image received separately: `docker load -i serve.tar`
+1. Run the forecast server with `docker run -p 80:80 serve`
+1. Query the forecasts by accessing `localhost:80/`
+
+### Procedure to prepare your code
 1. Start a git repository with ```git init```
-1. Install Python 3 and create a virtual env
 1. Do your magic on your local machine, trying to commit often
 1. Add your README, with instructions on how to run your code
 1. Run ```git bundle create YOURNAME.bundle HEAD ```
 1. Send the generated file by email back to your interviewer
-
-### Evaluation tool usage
-
-1. Install Python 3 and cd to the solution folder
-1. Run ```virtualenv env```
-1. Run ```. env/bin/activate``` (commands might differ depending on your OS)
-1. Run ```pip3 install -r requirements.txt```
-1. Create a subfolder and move the csv files for the days you want to evaluate
-1. Run ```python3 evaluate.py SUBFOLDER_NAME```
-
-## Presentation
-
-We want you to create a small presentation (use Google Slides) summarizing your findings and answering a few questions. \
-However the slides should be self-explanatory, be prepared to present your slides and answer additional questions.
-
-Your findings should focus on any relevant facts about the problem or concerns about the quality of the service provided\
-by the clinic.
-
-The questions we want you to answer in your presentation are:
-* Is it better to break down the problem into the forecasting of different components? Why?
-* What is the relationship between patient temperature and consultation duration?
-* Is there a relationship between time of the day and consultation duration? What could likely explain that?
-* Apart from the assessment result (_normal_, _urgent_), what is the feature that is more relevant for the problem?
-* What is your opinion about the scoring metric implemented in `evaluate.py`? Is there real-world support for it?
-* If you had more days to work on the solution, how would you architect the solution?
 
 ## Evaluation criteria
 
