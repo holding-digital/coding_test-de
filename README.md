@@ -30,6 +30,10 @@ Imagine, someone queries `YOUR-MS:8080/average_travel_time?from=f31423ab&to=f317
 
 Ok, you might be wondering: I don't know when a bus arrived at a stop, I only know when, sometime in the past, a system forecasted the bus would arrive. Well, life is hard, and we need to deal with the best information we have. So, to simplify things, you can assume the following: If a vehicle didn't produce new information about its arrival at a certain stop for 120 seconds or more, than the vehicle has already passed that stop, and you can safely assume it arrived at the latest forecasted time. I don't mean 120 seconds between you getting the information, but rather 120s between two forecast about the vehicle being produced.
 
+You might also wonder: **average**? How big is a good moving average for this problem? Let's assume you can keep the last 8 measurements. However, measurements that are more than 10 minutes old should be discarded.
+
+"Oh, what if I have no data for that stop pair? Or no data that is not too old?" Then do your best guess: return the current average of all stops you know.
+
 There might be other corner issues, but we trust your judgement about how to deal with them.
 
 ### Details
