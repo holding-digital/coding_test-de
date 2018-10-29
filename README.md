@@ -4,9 +4,8 @@ This repository was created to host the helper files for the Data Engineering ro
 
 The instructions below imply you have a minimum knowledge on how to run a docker container. This does not imply your \
 solution too should run in Docker. 
-You are free to write your solution in the language of your preference within a short list we provide. However, we recommend\
-you choose a language that you judge is the most appropriate for this kind of problem, taking into account easyness and time\
-to develop, performance, and availability of libraries and connectors that might be helpful.
+You are free to write your solution in the language of your preference within a short list we provide. However, we \ recommend you choose a language that you judge is the most appropriate for this kind of problem, taking into account \
+easyness and time to develop, performance, and availability of libraries and connectors that might be helpful.
 
 The languages you can consider as candidates for most appropriate ate:
 * JavaScript
