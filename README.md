@@ -2,11 +2,8 @@
 
 This repository was created to host the helper files for the Data Engineering role challenge.
 
-The instructions below imply you have a minimum knowledge on how to run a docker container. This does not imply your \
-solution too should run in Docker. 
-You are free to write your solution in the language of your preference within a short list we provide. However, we \
-recommend you choose a language that you judge is the most appropriate for this kind of problem, taking into account \
-easyness and time to develop, performance, and availability of libraries and connectors that might be helpful.
+The instructions below imply you have a minimum knowledge on how to run a docker container. This does not imply your solution too should run in Docker. 
+You are free to write your solution in the language of your preference within a short list we provide. However, we recommend you choose a language that you judge is the most appropriate for this kind of problem, taking into account easyness and time to develop, performance, and availability of libraries and connectors that might be helpful.
 
 The languages you can consider as candidates for most appropriate ate:
 * JavaScript
@@ -41,7 +38,7 @@ There might be other corner issues, but we trust your judgement about how to dea
 You will need to:
 * Create a local git repository
 * Download the docker file provided from a link provided by e-mail: `serve.tar` 
-* Create a microsservice to serve the needs above
+* Create a micro-service to serve the needs above
 * Submit your repo and any relevant comments
 
 Please don't use any external storage services. In case you need a database, you are free to use an emulator from a testing framework of the language you chose. In case you need SQL, make your code deal with a SQLite file.
